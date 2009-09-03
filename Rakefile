@@ -26,6 +26,19 @@ rescue LoadError
   puts "You really need Hoe installed to be able to package this gem"
 end
 
+begin
+  require 'jeweler'
+  Jeweler::Tasks.new do |gemspec|
+    gemspec.name = "ci_reporter"
+    gemspec.summary = "Generate reams of XML for use with continuous integration systems."
+    gemspec.email = "nick@nicksieger.com"
+    gemspec.homepage = "http://github.com/nicksieger/ci_reporter"
+    gemspec.authors = ["Nick Sieger"]
+  end
+rescue LoadError
+  puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
+end
+
 # Hoe insists on setting task :default => :test
 # !@#$ no easy way to empty the default list of prerequisites
 Rake::Task['default'].send :instance_variable_set, "@prerequisites", FileList[]
