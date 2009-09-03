@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
      "acceptance/rspec_example_spec.rb",
      "acceptance/test_unit_example_test.rb",
      "acceptance/verification_spec.rb",
+     "ci_reporter.gemspec",
      "lib/ci/reporter/core.rb",
      "lib/ci/reporter/rake/rspec.rb",
      "lib/ci/reporter/rake/rspec_loader.rb",
