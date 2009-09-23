@@ -6,7 +6,6 @@ require 'ci/reporter/core'
 tried_gem = false
 begin
   require 'spec'
-  require 'spec/runner/formatter/specdoc_formatter'
 rescue LoadError
   unless tried_gem
     tried_gem = true
@@ -42,24 +41,10 @@ module CI
       attr_accessor :report_manager
       def initialize(*args)
         super
-        @report_manager = ReportManager.new("spec")
+        @report_manager = ReportManager.new('spec')
         @suite = nil
       end
 
-      def start(spec_count)
-      end
-
-      # rspec 0.9
-      def add_behaviour(name)
-        new_suite(name)
-      end
-
-      # Compatibility with rspec < 1.2.4
-      def add_example_group(example_group)
-        new_suite(example_group.description)
-      end
-
-      # rspec >= 1.2.4
       def example_group_started(example_group)
         new_suite(example_group.description)
       end
@@ -88,20 +73,8 @@ module CI
         spec.name = "#{spec.name} (PENDING)"
       end
 
-      def start_dump
-      end
-
-      def dump_failure(*args)
-      end
-
       def dump_summary(*args)
         write_report
-      end
-
-      def dump_pending
-      end
-
-      def close
       end
 
       private
@@ -114,13 +87,6 @@ module CI
         write_report if @suite
         @suite = TestSuite.new name
         @suite.start
-      end
-    end
-
-    class RSpecDoc < RSpec
-      def initialize(*args)
-        @formatter = Spec::Runner::Formatter::SpecdocFormatter.new(*args)
-        super
       end
     end
   end
